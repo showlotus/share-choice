@@ -1,0 +1,19 @@
+{
+  "name": "scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "collect-oscars": "node ./oscars/collection-oscars-movie-info.js"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cheerio": "^0.22.35",
+    "cheerio": "^1.0.0",
+    "puppeteer": "^24.4.0",
+    "puppeteer-core": "^24.4.0"
+  }
+}
