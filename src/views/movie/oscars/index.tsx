@@ -7,22 +7,24 @@ import { Card } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
-import { cn } from '@/lib/utils'
+import { atou, cn, utoa } from '@/lib/utils'
 
 import MovieList from './data.json'
 
 export default function Oscars() {
+  const binaryArray = atou(window.location.hash.slice(1))
   const [movieList, updateMovieList] = useImmer(
-    MovieList.map((v, i) => ({ ...v, id: i, checked: false }))
+    MovieList.map((v, i) => ({ ...v, id: i, checked: binaryArray[i] === 1 }))
   )
   const checkedMovieList = useMemo(() => {
     return movieList.filter((v) => v.checked)
   }, [movieList])
 
   useEffect(() => {
-    const checkedIdList = checkedMovieList.map((v) => v.id)
-    console.log(checkedIdList)
-  }, [checkedMovieList])
+    const binaryArray = movieList.map((v) => (v.checked ? 1 : 0))
+    const base64 = utoa(binaryArray)
+    window.location.hash = base64
+  }, [movieList])
 
   return (
     <div className="h-full flex flex-col">
@@ -31,7 +33,7 @@ export default function Oscars() {
       </header>
 
       <ScrollArea className="flex-1">
-        <div className="m-8 grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-4 md:gap-6">
+        <div className="m-8 grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 2xl:grid-cols-2 gap-4 md:gap-6">
           {movieList.map((v) => {
             return (
               <Card
@@ -49,11 +51,11 @@ export default function Oscars() {
                   })
                 }}
               >
-                <div className="min-w-[270px] min-h-[400px] border">
-                  {/* <img src={v.poster} alt="" /> */}
+                <div className="min-w-[80px] sm:min-w-[270px] min-h-[200px] self-center">
+                  <img src={v.poster} alt="" className="border" />
                 </div>
-                <div>
-                  <div className="flex justify-between">
+                <div className="text-xs">
+                  <div className="flex justify-between sm:text-xl">
                     <div className="font-bold text-yellow-400">
                       {v.title
                         .split(' ')
@@ -87,7 +89,7 @@ export default function Oscars() {
                     })}
                   </div>
                   <Separator className="my-2 opacity-0" />
-                  <div>剧情简介: {v.intro}</div>
+                  <div className="hidden sm:block">剧情简介: {v.intro}</div>
                 </div>
               </Card>
             )
@@ -98,7 +100,16 @@ export default function Oscars() {
       <footer className="px-4 py-3 border-b-0 border-l-0 border-r-0 border flex justify-between items-center">
         <span>已选择 {checkedMovieList.length} 项</span>
         <div className="flex gap-3">
-          <Button variant="outline">全选</Button>
+          <Button
+            variant="outline"
+            onClick={() => {
+              updateMovieList((draft) => {
+                draft.forEach((v) => (v.checked = true))
+              })
+            }}
+          >
+            全选
+          </Button>
           <Button variant="outline">查看已选</Button>
           <Button variant="outline">分享</Button>
         </div>

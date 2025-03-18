@@ -4,7 +4,8 @@
   "description": "",
   "main": "",
   "scripts": {
-    "collect-oscars": "node ./oscars/collection-oscars-movie-info.js"
+    "collect-oscars": "node ./oscars/collection-oscars-movie-info.js",
+    "url-to-base64": "node ./oscars/url-to-base64.js"
   },
   "type": "module",
   "keywords": [],
