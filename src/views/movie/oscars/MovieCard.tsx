@@ -5,9 +5,9 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Separator } from '@/components/ui/separator'
 import { cn } from '@/lib/utils'
 
-import { Movie } from '.'
 import { MovieTitle } from './MovieTitle'
 import { ViewMoreSheet } from './ViewMoreSheet'
+import { Movie } from './data'
 
 interface MovieCardProps {
   movie: Movie

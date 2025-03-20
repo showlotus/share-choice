@@ -8,7 +8,7 @@ import {
   SheetTrigger
 } from '@/components/ui/sheet'
 
-import type { Movie } from '.'
+import { Movie } from './data'
 
 interface ViewMoreSheetProps {
   children: React.ReactNode
