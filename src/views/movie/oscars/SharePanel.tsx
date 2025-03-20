@@ -69,7 +69,7 @@ function SharePanelArea() {
 
   const { base64 } = useParams()
 
-  const shareUrl = location.origin + '/#/movie/oscars/share/' + base64
+  const shareUrl = location.origin + location.pathname + '#/movie/oscars/share/' + base64
 
   const handleCopy = () => {
     copy(shareUrl)
