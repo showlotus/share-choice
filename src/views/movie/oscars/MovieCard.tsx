@@ -11,14 +11,14 @@ import { ViewMoreSheet } from './ViewMoreSheet'
 
 interface MovieCardProps {
   movie: Movie
-  onCheckedChange: (checked: CheckedState) => void
+  onCheckedChange?: (checked: CheckedState) => void
 }
 
 export function MovieCard(props: MovieCardProps) {
   const { movie, onCheckedChange } = props
   return (
     <Card
-      key={movie.id}
+      key={movie.name}
       className={cn('p-4 relative sm:hover:bg-accent sm:hover:text-accent-foreground', {
         'border-primary': movie.checked
       })}
@@ -27,7 +27,11 @@ export function MovieCard(props: MovieCardProps) {
         <div className="font-bold text-yellow-400">
           <MovieTitle title={movie.title} />
         </div>
-        <Checkbox checked={movie.checked} onCheckedChange={onCheckedChange} />
+        <Checkbox
+          className={cn({ hidden: !onCheckedChange })}
+          checked={movie.checked}
+          onCheckedChange={onCheckedChange}
+        />
       </div>
 
       <div className="flex gap-4 md:gap-6">

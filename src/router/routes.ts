@@ -17,7 +17,17 @@ export const routes: RouteConfig[] = [
     children: [
       {
         path: 'oscars',
-        element: React.lazy(() => import('@/views/movie/oscars/index'))
+        element: React.lazy(() => import('@/views/movie/oscars/index')),
+        children: [
+          {
+            path: 'view',
+            element: React.lazy(() => import('@/views/movie/oscars/View'))
+          },
+          {
+            path: 'share',
+            element: React.lazy(() => import('@/views/movie/oscars/Share'))
+          }
+        ]
       }
     ]
   },
