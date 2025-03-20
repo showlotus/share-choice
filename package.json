@@ -2,6 +2,8 @@
   "name": "share-choice",
   "version": "0.0.1",
   "type": "module",
+  "private": true,
+  "packageManager": "pnpm@8.10.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
