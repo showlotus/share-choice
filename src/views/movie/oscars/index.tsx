@@ -3,14 +3,10 @@ import { useEffect, useMemo } from 'react'
 import { useImmer } from 'use-immer'
 
 import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
-import { Checkbox } from '@/components/ui/checkbox'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { Separator } from '@/components/ui/separator'
-import { atou, cn, utoa } from '@/lib/utils'
+import { atou, utoa } from '@/lib/utils'
 
-import { MovieTitle } from './MovieTitle'
-import { ViewMoreSheet } from './ViewMoreSheet'
+import { MovieCard } from './MovieCard'
 import MovieList from './data.json'
 
 export interface Movie {
@@ -48,65 +44,18 @@ export default function Oscars() {
         <div className="m-8 grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 2xl:grid-cols-2 gap-4 md:gap-6">
           {movieList.map((movie) => {
             return (
-              <Card
+              <MovieCard
                 key={movie.id}
-                className={cn('p-4 relative sm:hover:bg-accent sm:hover:text-accent-foreground', {
-                  'border-primary': movie.checked
-                })}
-              >
-                <div className="mb-4 flex justify-between items-center sm:text-xl">
-                  <div className="font-bold text-yellow-400">
-                    <MovieTitle title={movie.title} />
-                  </div>
-                  <Checkbox
-                    checked={movie.checked}
-                    onCheckedChange={(checked) => {
-                      updateMovieList((draft) => {
-                        const target = draft.find((d) => d.id === movie.id)
-                        if (target) {
-                          target.checked = !!checked
-                        }
-                      })
-                    }}
-                  />
-                </div>
-
-                <div className="flex gap-4 md:gap-6">
-                  <div className="min-w-[80px] h-[140px]">
-                    <img src={movie.poster} alt="" className="h-full border object-contain" />
-                  </div>
-                  <div className="flex-1 text-xs">
-                    <div className="font-bold text-base">{movie.name}</div>
-                    <Separator className="my-2 opacity-0" />
-                    <div className="text-xs">
-                      {movie.abstract.split('\n').map((v, i, arr) => {
-                        return (
-                          <div
-                            key={i}
-                            className={cn('flex', { 'justify-between': i === arr.length - 1 })}
-                          >
-                            {v}
-
-                            {i === arr.length - 1 ? (
-                              <ViewMoreSheet data={movie}>
-                                <span className="text-blue-500 hover:text-blue-600 border border-b border-t-0 border-l-0 border-r-0 cursor-pointer sm:hidden">
-                                  查看更多
-                                </span>
-                              </ViewMoreSheet>
-                            ) : (
-                              <br />
-                            )}
-                          </div>
-                        )
-                      })}
-                    </div>
-                    <div className="hidden sm:block">
-                      <Separator className="my-2 opacity-0" />
-                      <div>剧情简介: {movie.intro}</div>
-                    </div>
-                  </div>
-                </div>
-              </Card>
+                movie={movie}
+                onCheckedChange={(checked) => {
+                  updateMovieList((draft) => {
+                    const target = draft.find((d) => d.id === movie.id)
+                    if (target) {
+                      target.checked = !!checked
+                    }
+                  })
+                }}
+              />
             )
           })}
         </div>
