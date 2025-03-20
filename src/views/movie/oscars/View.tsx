@@ -1,4 +1,5 @@
 import { useEffect, useMemo } from 'react'
+import { useNavigate, useParams } from 'react-router'
 
 import { useImmer } from 'use-immer'
 
@@ -12,7 +13,9 @@ import { ViewCheckedListPanel } from './ViewCheckedListPanel'
 import MovieList from './data.json'
 
 export default function View() {
-  const binaryArray = atou(window.location.hash.slice(1))
+  const params = useParams()
+  const navigate = useNavigate()
+  const binaryArray = atou(params.base64 || '')
   const [movieList, updateMovieList] = useImmer(
     MovieList.map((v, i) => ({ ...v, checked: binaryArray[i] === 1 }))
   )
@@ -23,8 +26,8 @@ export default function View() {
   useEffect(() => {
     const binaryArray = movieList.map((v) => (v.checked ? 1 : 0))
     const base64 = utoa(binaryArray)
-    window.location.hash = base64
-  }, [movieList])
+    navigate(`/movie/oscars/view/${base64}`, { replace: true })
+  }, [movieList]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="h-full flex flex-col">

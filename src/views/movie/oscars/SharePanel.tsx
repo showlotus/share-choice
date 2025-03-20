@@ -1,3 +1,5 @@
+import { useParams } from 'react-router'
+
 import { QRCodeCanvas } from 'qrcode.react'
 import { useCopyToClipboard, useMediaQuery } from 'usehooks-ts'
 
@@ -65,7 +67,9 @@ function SharePanelArea() {
   const { toast } = useToast()
   const [copiedText, copy] = useCopyToClipboard()
 
-  const shareUrl = location.origin + '/movie/oscars/share' + location.hash
+  const { base64 } = useParams()
+
+  const shareUrl = location.origin + '/#/movie/oscars/share/' + base64
 
   const handleCopy = () => {
     copy(shareUrl)

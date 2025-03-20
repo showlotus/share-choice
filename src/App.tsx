@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router'
+import { HashRouter, Route, Routes } from 'react-router'
 
 import { Toaster } from '@/components/ui/toaster'
 import { RouteConfig, routes } from '@/router/routes'
@@ -24,9 +24,9 @@ function App() {
   return (
     <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
       <DrawerCSSProvider>
-        <BrowserRouter>
+        <HashRouter>
           <Routes>{renderRoutes(routes)}</Routes>
-        </BrowserRouter>
+        </HashRouter>
       </DrawerCSSProvider>
       <Toaster />
     </ThemeProvider>

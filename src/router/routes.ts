@@ -20,11 +20,11 @@ export const routes: RouteConfig[] = [
         element: React.lazy(() => import('@/views/movie/oscars/index')),
         children: [
           {
-            path: 'view',
+            path: 'view/:base64?',
             element: React.lazy(() => import('@/views/movie/oscars/View'))
           },
           {
-            path: 'share',
+            path: 'share/:base64?',
             element: React.lazy(() => import('@/views/movie/oscars/Share'))
           }
         ]
