@@ -1,7 +1,9 @@
 import { BrowserRouter, Route, Routes } from 'react-router'
 
+import { Toaster } from '@/components/ui/toaster'
 import { RouteConfig, routes } from '@/router/routes'
 
+import { DrawerCSSProvider } from './components/drawer-css-provider'
 import { ThemeProvider } from './components/theme-provider'
 
 // 递归渲染路由
@@ -21,9 +23,12 @@ const renderRoutes = (routes: RouteConfig[]): React.ReactElement[] => {
 function App() {
   return (
     <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
-      <BrowserRouter>
-        <Routes>{renderRoutes(routes)}</Routes>
-      </BrowserRouter>
+      <DrawerCSSProvider>
+        <BrowserRouter>
+          <Routes>{renderRoutes(routes)}</Routes>
+        </BrowserRouter>
+      </DrawerCSSProvider>
+      <Toaster />
     </ThemeProvider>
   )
 }

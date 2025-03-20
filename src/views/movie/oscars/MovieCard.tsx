@@ -6,7 +6,7 @@ import { Separator } from '@/components/ui/separator'
 import { cn } from '@/lib/utils'
 
 import { MovieTitle } from './MovieTitle'
-import { ViewMoreSheet } from './ViewMoreSheet'
+import { ViewMoreDrawer } from './ViewMoreDrawer'
 import { Movie } from './data'
 
 interface MovieCardProps {
@@ -39,20 +39,20 @@ export function MovieCard(props: MovieCardProps) {
           <img src={movie.poster} alt="" className="h-full border object-contain" />
         </div>
         <div className="flex-1">
-          <div className="font-bold text-base">{movie.name}</div>
+          <div className="font-bold text-base lg:text-xl">{movie.name}</div>
           <Separator className="my-2 opacity-0" />
-          <div className="text-xs sm:text-sm">
+          <div className="text-xs sm:text-sm lg:text-base">
             {movie.abstract.split('\n').map((v, i, arr) => {
               return (
                 <div key={i} className={cn('flex', { 'justify-between': i === arr.length - 1 })}>
                   {v}
 
                   {i === arr.length - 1 ? (
-                    <ViewMoreSheet movie={movie}>
+                    <ViewMoreDrawer movie={movie}>
                       <span className="text-blue-500 hover:text-blue-600 cursor-pointer sm:hidden">
                         查看更多
                       </span>
-                    </ViewMoreSheet>
+                    </ViewMoreDrawer>
                   ) : (
                     <br />
                   )}
@@ -60,7 +60,9 @@ export function MovieCard(props: MovieCardProps) {
               )
             })}
           </div>
-          <div className="mt-4 hidden sm:block text-xs sm:text-sm">剧情简介: {movie.intro}</div>
+          <div className="mt-4 hidden sm:block text-xs sm:text-sm lg:text-base">
+            剧情简介: {movie.intro}
+          </div>
         </div>
       </div>
     </Card>

@@ -7,8 +7,8 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { atou, utoa } from '@/lib/utils'
 
 import { MovieCard } from './MovieCard'
-import { ShareSheet } from './ShareSheet'
-import { ViewCheckedListSheet } from './ViewCheckedListSheet'
+import { SharePanel } from './SharePanel'
+import { ViewCheckedListPanel } from './ViewCheckedListPanel'
 import MovieList from './data.json'
 
 export default function View() {
@@ -66,16 +66,16 @@ export default function View() {
           >
             {checkedMovieList.length === movieList.length ? '取消全选' : '全选'}
           </Button>
-          <ViewCheckedListSheet list={checkedMovieList}>
+          <ViewCheckedListPanel list={checkedMovieList}>
             <Button variant="outline" size="sm">
               查看已选
             </Button>
-          </ViewCheckedListSheet>
-          <ShareSheet>
+          </ViewCheckedListPanel>
+          <SharePanel>
             <Button variant="outline" size="sm">
               分享
             </Button>
-          </ShareSheet>
+          </SharePanel>
         </div>
       </footer>
     </div>
