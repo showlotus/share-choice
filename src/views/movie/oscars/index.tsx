@@ -6,14 +6,15 @@ import { useMediaQuery } from 'usehooks-ts'
 import { Skeleton } from '@/components/ui/skeleton'
 
 function FallbackSkeleton() {
-  const isNotPhone = useMediaQuery('(min-width: 500px)')
-  const cardNums = isNotPhone ? 5 : 3
+  // const isNotPhone = useMediaQuery('(min-width: 500px)')
+  // const cardNums = isNotPhone ? 5 : 3
+  const cardNums = 3
 
   return (
     <div className="h-full flex flex-col">
       <Skeleton className="m-4 h-[56px]" />
 
-      <div className="flex-1 flex flex-col justify-evenly gap-4 md:gap-6 ">
+      <div className="flex-1 flex flex-col gap-4 md:gap-6 ">
         {new Array(cardNums).fill(0).map((_, i) => {
           return (
             <div className="mx-4" key={i}>
@@ -33,7 +34,7 @@ function FallbackSkeleton() {
         })}
       </div>
 
-      <Skeleton className="m-4 h-[60px] justify-self-end" />
+      {/* <Skeleton className="m-4 h-[60px] justify-self-end" /> */}
     </div>
   )
 }
