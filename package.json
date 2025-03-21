@@ -6,7 +6,8 @@
   "packageManager": "pnpm@8.10.0",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && NODE_ENV_OUTDIR=dist vite build",
+    "build:website": "tsc -b && NODE_ENV_OUTDIR=docs vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "prettier": "prettier --write '**/*.{js,jsx,ts,tsx}'"

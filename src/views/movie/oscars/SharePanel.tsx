@@ -65,37 +65,29 @@ function ShareSheet(props: { children: React.ReactNode }) {
 
 function SharePanelArea() {
   const { toast } = useToast()
-  const [copiedText, copy] = useCopyToClipboard()
+  const [, copy] = useCopyToClipboard()
 
   const { base64 } = useParams()
 
   const shareUrl = location.origin + location.pathname + '#/movie/oscars/share/' + base64
 
-  const handleCopy = () => {
-    copy(shareUrl)
-      .then(() => {
-        if (!copiedText) {
-          return toast({
-            variant: 'destructive',
-            description: '复制失败',
-            duration: 1000
-          })
-        }
-
-        toast({
-          description: '复制成功',
-          duration: 1000
-        })
-        console.log(`复制的链接: ${copiedText}`)
+  const handleCopy = async () => {
+    try {
+      const success = await copy(shareUrl)
+      if (!success) throw new Error('')
+      toast({
+        description: '复制成功',
+        duration: 1000
       })
-      .catch((err) => {
-        toast({
-          variant: 'destructive',
-          description: '复制失败',
-          duration: 1000
-        })
-        console.error('复制失败', err)
+      console.log(`复制的链接: ${shareUrl}`)
+    } catch (err) {
+      toast({
+        variant: 'destructive',
+        description: '复制失败',
+        duration: 1000
       })
+      console.error('复制失败', err)
+    }
   }
 
   return (
@@ -104,16 +96,14 @@ function SharePanelArea() {
         <TabsTrigger value="link">链接</TabsTrigger>
         <TabsTrigger value="qr-code">二维码</TabsTrigger>
       </TabsList>
-      <TabsContent value="link" className="flex gap-2">
+      <TabsContent value="link" className="flex flex-col gap-2">
         <Input type="text" readOnly disabled value={shareUrl} />
         <Button type="submit" size="sm" onClick={handleCopy}>
           复制链接
         </Button>
       </TabsContent>
       <TabsContent value="qr-code" className="flex justify-center">
-        <div className="w-[200px] h-[200px] inline-block border">
-          <QRCodeCanvas value={shareUrl} includeMargin marginSize={2} size={200} />
-        </div>
+        <QRCodeCanvas value={shareUrl} includeMargin marginSize={2} size={200} className="border" />
       </TabsContent>
     </Tabs>
   )
