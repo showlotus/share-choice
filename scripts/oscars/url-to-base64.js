@@ -2,7 +2,7 @@ import axios from 'axios'
 import fs from 'fs'
 import fsPromise from 'node:fs/promises'
 
-const data = JSON.parse(fs.readFileSync('../src/views/movie/oscars/data.json', 'utf-8'))
+const data = JSON.parse(fs.readFileSync('./oscars/data.json', 'utf-8'))
 
 async function imageUrlToBase64(imageUrl) {
   try {

@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils'
 
 import { MovieTitle } from './MovieTitle'
 import { ViewMoreDrawer } from './ViewMoreDrawer'
-import { Movie } from './data'
+import { Movie, getImgUrl } from './data'
 
 interface MovieCardProps {
   movie: Movie
@@ -36,7 +36,12 @@ export function MovieCard(props: MovieCardProps) {
 
       <div className="flex gap-4 md:gap-6">
         <div className="min-w-[80px] h-[140px] sm:min-w-[120px] sm:h-[180px] md:min-w-[180px] md:min-h-[300px]">
-          <img src={movie.poster} alt="" className="h-full border object-contain" />
+          <img
+            src={getImgUrl(movie.name)}
+            alt=""
+            className="h-full border object-contain"
+            loading="lazy"
+          />
         </div>
         <div className="flex-1">
           <div className="font-bold text-base lg:text-xl">{movie.name}</div>

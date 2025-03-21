@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/drawer'
 import { ScrollArea } from '@/components/ui/scroll-area'
 
-import { Movie } from './data'
+import { Movie, getImgUrl } from './data'
 
 interface ViewMoreDrawerProps {
   children: React.ReactNode
@@ -27,7 +27,7 @@ export function ViewMoreDrawer(props: ViewMoreDrawerProps) {
         </DrawerHeader>
         <ScrollArea className="flex-1">
           <div className="flex flex-col gap-2 px-6 pb-6">
-            <img src={movie.poster} alt="" className="self-center border" />
+            <img src={getImgUrl(movie.name)} alt="" className="self-center border" />
             <div className="text-xs">
               {movie.abstract.split('\n').map((v, i) => {
                 return (

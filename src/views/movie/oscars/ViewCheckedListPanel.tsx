@@ -19,7 +19,7 @@ import {
   SheetTrigger
 } from '@/components/ui/sheet'
 
-import { Movie } from './data'
+import { Movie, getImgUrl } from './data'
 
 function ViewCheckedListSheet(props: { list: Movie[]; children: React.ReactNode }) {
   const { children, list } = props
@@ -70,7 +70,7 @@ function ViewCheckedListArea(props: { list: Movie[] }) {
       {list.map((movie) => {
         return (
           <Card key={movie.name} className="p-2 flex gap-2">
-            <img src={movie.poster} alt="" className="border h-32 self-center" />
+            <img src={getImgUrl(movie.name)} alt="" className="border h-32 self-center" />
             <div className="flex flex-col gap-4">
               <div className="font-bold">{movie.name}</div>
               <div className="text-xs">

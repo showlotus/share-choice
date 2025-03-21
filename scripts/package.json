@@ -5,7 +5,9 @@
   "main": "",
   "scripts": {
     "collect-oscars": "node ./oscars/collection-oscars-movie-info.js",
-    "url-to-base64": "node ./oscars/url-to-base64.js"
+    "url-to-base64": "node ./oscars/url-to-base64.js",
+    "download-img": "node ./oscars/download-img.js",
+    "generate-img-import": "node ./oscars/generate-img-import.js"
   },
   "type": "module",
   "keywords": [],
