@@ -27,7 +27,7 @@ export function ViewMoreDrawer(props: ViewMoreDrawerProps) {
         </DrawerHeader>
         <ScrollArea className="flex-1">
           <div className="flex flex-col gap-2 px-6 pb-6">
-            <img src={getImgUrl(movie.name)} alt="" className="self-center border" />
+            <img src={getImgUrl(movie.name)} alt="" className="self-center border" loading="lazy" />
             <div className="text-xs">
               {movie.abstract.split('\n').map((v, i) => {
                 return (

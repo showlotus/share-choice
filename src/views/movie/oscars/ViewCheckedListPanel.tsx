@@ -70,7 +70,12 @@ function ViewCheckedListArea(props: { list: Movie[] }) {
       {list.map((movie) => {
         return (
           <Card key={movie.name} className="p-2 flex gap-2">
-            <img src={getImgUrl(movie.name)} alt="" className="border h-32 self-center" />
+            <img
+              src={getImgUrl(movie.name)}
+              alt=""
+              className="border h-32 self-center"
+              loading="lazy"
+            />
             <div className="flex flex-col gap-4">
               <div className="font-bold">{movie.name}</div>
               <div className="text-xs">
