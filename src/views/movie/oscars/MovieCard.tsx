@@ -35,11 +35,11 @@ export function MovieCard(props: MovieCardProps) {
       </div>
 
       <div className="flex gap-4 md:gap-6">
-        <div className="min-w-[80px] h-[140px] sm:min-w-[120px] sm:h-[180px] md:min-w-[180px] md:min-h-[300px]">
+        <div className="min-w-[80px] sm:min-w-[120px] md:min-w-[180px] h-[140px] sm:h-[180px] md:min-h-[300px]">
           <img
             src={getImgUrl(movie.name)}
             alt=""
-            className="h-full border object-contain"
+            className="h-full border object-contain min-w-[80px] sm:min-w-[120px] md:min-w-[180px]"
             loading="lazy"
           />
         </div>
