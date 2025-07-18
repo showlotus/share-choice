@@ -23,9 +23,9 @@ jobs:
         uses: actions/setup-node@v2
         with:
           # 根据需要设置 Node.js 版本
-          node-version: lts/*
-          # node-version: '18.x'
-          cache: pnpm
+          # node-version: lts/*
+          node-version: '18.x'
+          # cache: pnpm
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
