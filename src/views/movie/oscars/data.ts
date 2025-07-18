@@ -206,5 +206,5 @@ const IMG = {
 } as any // eslint-disable-line @typescript-eslint/no-explicit-any
 
 export function getImgUrl(imgName: string) {
-  return IMG[imgName.replace(/^(([\u4e00-\u9fa5]|·|\d)+).*/, '$1')] as string
+  return IMG[imgName.replace(/^(([\u4e00-\u9fa5]|·|：|\d)+).*/, '$1')] as string
 }

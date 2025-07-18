@@ -1,44 +1,36 @@
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
+import baseX from 'base-x'
+import pako from 'pako'
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-// Base64 字符表
-const BASE64_CHARSET = '0123456789/ABCDEFGHIJKLMNOPQRSTUVWXYZ+abcdefghijklmnopqrstuvwxyz'
+// Base 字符表
+const BASE_CHARSET = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+const base = baseX(BASE_CHARSET)
 
-export function utoa(bits: number[]) {
-  let result = ''
-
-  // 按 6 bit 分组
-  for (let i = 0; i < bits.length; i += 6) {
-    let value = 0
-    for (let j = 0; j < 6; j++) {
-      const bit = bits[i + j] !== undefined ? bits[i + j] : 0 // 不足 6 位时补 0
-      value = (value << 1) | bit
-    }
-    result += BASE64_CHARSET[value]
-  }
-
-  return result
+/**
+ * 将二进制数组编码为 Base 字符串
+ * @param bits 二进制数组
+ * @returns Base 字符串
+ */
+export function encodeBits(bits: number[]) {
+  const byteArray = Uint8Array.from(bits)
+  const compressed = pako.deflateRaw(byteArray)
+  return base.encode(compressed)
 }
 
-export function atou(base64: string) {
-  const bits = []
-
-  for (let i = 0; i < base64.length; i++) {
-    const char = base64[i]
-    const index = BASE64_CHARSET.indexOf(char)
-    if (index === -1) {
-      return []
-    }
-    // index 转成 6 位二进制
-    const binStr = index.toString(2).padStart(6, '0')
-    for (let j = 0; j < 6; j++) {
-      bits.push(Number(binStr[j]))
-    }
-  }
-
-  return bits
+/**
+ * 将 Base 字符串解码为二进制数组
+ * @param encodedStr Base 字符串
+ * @returns 二进制数组
+ */
+export function decodeBits(encodedStr: string) {
+  if (!encodedStr) return []
+  const compressed = base.decode(encodedStr)
+  const decompressed = pako.inflateRaw(compressed)
+  return Array.from(decompressed)
 }

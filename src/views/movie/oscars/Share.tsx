@@ -1,14 +1,14 @@
 import { useParams } from 'react-router'
 
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { atou } from '@/lib/utils'
+import { decodeBits } from '@/lib/utils'
 
 import { MovieCard } from './MovieCard'
 import MovieList from './data.json'
 
 export default function Share() {
   const params = useParams()
-  const binaryArray = atou(params.base64 || '')
+  const binaryArray = decodeBits(params.base64 || '')
   const movieList = MovieList.filter((_, i) => binaryArray[i] === 1)
 
   return (

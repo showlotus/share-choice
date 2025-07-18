@@ -5,7 +5,7 @@ import { useImmer } from 'use-immer'
 
 import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { atou, utoa } from '@/lib/utils'
+import { decodeBits, encodeBits } from '@/lib/utils'
 
 import { MovieCard } from './MovieCard'
 import { SharePanel } from './SharePanel'
@@ -15,7 +15,7 @@ import MovieList from './data.json'
 export default function View() {
   const params = useParams()
   const navigate = useNavigate()
-  const binaryArray = atou(params.base64 || '')
+  const binaryArray = decodeBits(params.base64 || '')
   const [movieList, updateMovieList] = useImmer(
     MovieList.map((v, i) => ({ ...v, checked: binaryArray[i] === 1 }))
   )
@@ -25,7 +25,7 @@ export default function View() {
 
   useEffect(() => {
     const binaryArray = movieList.map((v) => (v.checked ? 1 : 0))
-    const base64 = utoa(binaryArray)
+    const base64 = encodeBits(binaryArray)
     navigate(`/movie/oscars/view/${base64}`, { replace: true })
   }, [movieList]) // eslint-disable-line react-hooks/exhaustive-deps
 
