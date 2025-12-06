@@ -64,7 +64,7 @@ importers:
         version: 1.0.7(tailwindcss@3.4.17)
       use-immer:
         specifier: ^0.11.0
-        version: 0.11.0(immer@10.2.0)(react@19.0.0)
+        version: 0.11.0(immer@11.0.1)(react@19.0.0)
       usehooks-ts:
         specifier: ^3.1.1
         version: 3.1.1(react@19.0.0)
@@ -2440,8 +2440,8 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
-  /immer@10.2.0:
-    resolution: {integrity: sha512-d/+XTN3zfODyjr89gM3mPq1WNX2B8pYsu7eORitdwyA2sBubnTl3laYlBk4sXY5FUa5qTZGBDPJICVbvqzjlbw==}
+  /immer@11.0.1:
+    resolution: {integrity: sha512-naDCyggtcBWANtIrjQEajhhBEuL9b0Zg4zmlWK2CzS6xCWSE39/vvf4LqnMjUAWHBhot4m9MHCM/Z+mfWhUkiA==}
     dev: false
 
   /import-fresh@3.3.1:
@@ -3315,13 +3315,13 @@ packages:
       tslib: 2.8.1
     dev: false
 
-  /use-immer@0.11.0(immer@10.2.0)(react@19.0.0):
+  /use-immer@0.11.0(immer@11.0.1)(react@19.0.0):
     resolution: {integrity: sha512-RNAqi3GqsWJ4bcCd4LMBgdzvPmTABam24DUaFiKfX9s3MSorNRz9RDZYJkllJoMHUxVLMDetwAuCDeyWNrp1yA==}
     peerDependencies:
       immer: '>=8.0.0'
       react: ^16.8.0 || ^17.0.1 || ^18.0.0 || ^19.0.0
     dependencies:
-      immer: 10.2.0
+      immer: 11.0.1
       react: 19.0.0
     dev: false
 
